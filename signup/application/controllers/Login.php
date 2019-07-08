@@ -38,7 +38,7 @@ class Login extends CI_Controller
 		$this->load->view('login',$data);
 	}
 
-	public function DoLoginAdmin()
+	public function DoLoginUser()
 	{
 		
         $UserName = ""; 
@@ -91,6 +91,7 @@ class Login extends CI_Controller
 					//alert("Successfully login");
 					$ServiceStatus=1;
     				$ReturnMessage="Successfully login";
+                    
 				}
 				else
 				{
@@ -99,7 +100,7 @@ class Login extends CI_Controller
     				$ReturnMessage="Invalied Username or Password";
 				}
 			}
-			echo $ReturnMessage;
+			//echo $ReturnMessage;
 
 			$json = array();
       		$jsonarray = array( 
@@ -116,6 +117,88 @@ class Login extends CI_Controller
     	}
 		
 	}
+
+    public function DoLoginAdmin()
+    {
+        $UserName = ""; 
+        $Password = "";       
+        $PasswordEncrypt="";
+              
+
+        $ServiceStatus = 0;
+        
+        $ReturnMessage = "";        
+
+        $postdata = file_get_contents("php://input");
+
+        if (isset($postdata))
+        {
+            $request = json_decode($postdata);
+        
+            if(empty($request))
+            {
+                $DeviceType = "Web";    
+                
+                $UserName =  !empty($this->input->post('UserName'))?$this->input->post('UserName'):"";
+                $Password =  !empty($this->input->post('Password'))?$this->input->post('Password'):"";
+            
+            }
+            else
+            {
+                
+                $UserName =  isset($request->UserName)?$request->UserName:"";
+                $Password =  isset($request->Password)?$request->Password:"";
+                
+            }
+
+            $PasswordEncrypt=md5($Password);
+
+            if(empty($UserName)||empty($Password))
+            {
+                $ServiceStatus=0;
+                $ReturnMessage="UserName or Password Blank";
+            }
+            else
+            {
+                $userProfile=$this->User_model->can_Adminlogin($UserName,$PasswordEncrypt);
+                if($userProfile)
+                {
+                    //alert("Successfully login");
+                    $ServiceStatus=1;
+                    $ReturnMessage="Successfully login";
+                    redirect('Dashboard', 'refresh');
+                }
+                else
+                {
+                    
+                    $ServiceStatus=0;
+                    $ReturnMessage="Invalied Username or Password";
+                    
+                    ?>
+                    <script type="text/javascript">
+                    alert("Invalied Username or Password");
+                    </script>
+                    <?php
+                    redirect('loginPage', 'refresh');
+                 //alert("Invalied Username or Password");
+                }
+            }
+            //echo $ReturnMessage;
+
+            $json = array();
+            $jsonarray = array( 
+                'ServiceStatus'=>$ServiceStatus,
+                'ReturnMessage'=>$ReturnMessage,     
+                    
+                );
+
+            array_push($json, $jsonarray);   
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
+            die();
+
+        }
+    }
 
     public function show_sign_up()
     {

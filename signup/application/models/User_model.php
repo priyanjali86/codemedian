@@ -64,8 +64,27 @@ class User_model extends CI_Model
     {
         $this->db->where('Username',$username);
         $this->db->where('Password',$password);
+        $this->db->where('IsActive', 1);
+        $this->db->where('IsDeleted', 0);
 
         $query=$this->db->get('tbl_user_information');
+
+        if($query->num_rows() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function can_Adminlogin($username,$password)
+    {
+        $this->db->where('UserName',$username);
+        $this->db->where('Password',$password);
+
+        $query=$this->db->get('tbl_admin');
 
         if($query->num_rows() > 0)
         {

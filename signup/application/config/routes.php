@@ -61,6 +61,12 @@ $route['GetUserData'] = "User/GetUserData";
 
 $route['DoLoginAdmin'] = "Login/DoLoginAdmin";
 
+$route['DoLoginUser'] = "Login/DoLoginUser";
+
 $route['show_sign_up_form'] ='Login/show_sign_up';
 
 $route['Signup'] ='Login/SignUp';
+
+$route['Dashboard'] ='Dashboard/index';
+
+$route['loginPage'] ='Login/index';
