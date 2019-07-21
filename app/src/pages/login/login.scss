@@ -1,0 +1,20 @@
+.toolbar-background {background-color: #000;}
+.toolbar-title {color:#fff;}
+.content {background:url(../../assets/imgs/app-bg.jpg) no-repeat center;background-size: cover;}
+
+page-login {
+figure {text-align:center;}
+.input-wrapper {display: block;}
+.list .item-block .item-inner {
+    border-bottom: 0px solid #dedede;
+}
+.scroll-content {background:transparent;}
+.loginputs {background: transparent;margin: 0 0 20px;
+    .label {color:#686868;margin-bottom: 5px;}
+    .text-input {padding: 5px 0px 10px;margin: 0;border-bottom: 1px solid #515151;}
+    }
+     .item-input:last-child {border: 0px !important;}
+}
+.forgot {display: flex; justify-content: space-between;padding-top: 0px !important;color:#7a7a7a;
+    a {color:#5b5b5b;text-decoration: none;}
+}

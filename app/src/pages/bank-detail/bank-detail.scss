@@ -1,0 +1,21 @@
+.toolbar-content {display: flex;
+    ion-icon {font-weight: bold;}
+}
+
+page-bank-detail {
+    .modal-wrapper  {
+        width: 768px;
+        height: 500px;
+    }
+
+    .bankDetailsFields {background:transparent;
+        ion-item {background:transparent;
+            ion-label {font-size: 1.6rem !important;color:#000 !important;}
+        }
+    }
+
+    .addBank {text-align: center;
+        button {padding:16px 35px; display: inline-block;width: auto;contain: none;
+            height: auto;background:#000;color: #fff;font-size: 1.4rem;margin-top:20px;}
+    }
+}

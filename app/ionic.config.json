@@ -1,0 +1,7 @@
+{
+  "name": "shareapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
