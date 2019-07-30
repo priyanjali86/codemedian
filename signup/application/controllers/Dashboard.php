@@ -45,6 +45,22 @@ class Dashboard extends CI_Controller {
             
             $this->load->view('index',$data);
         }
+
+        function UserStatus()
+        {
+            $baseurl= $this->config->item('base_url'); 
+            $data['baseurl']=$baseurl;
+            
+            $query=$this->User_model->displayrecords();
+
+            $data['EMPLOYEES'] = null;
+            if($query){
+            $data['EMPLOYEES'] =  $query;
+            }
+            //$this->load->view('display_records',$result);
+
+            $this->load->view('user_status',$data);
+        }
 }
 
 ?>

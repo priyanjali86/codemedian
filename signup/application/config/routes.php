@@ -70,3 +70,15 @@ $route['Signup'] ='Login/SignUp';
 $route['Dashboard'] ='Dashboard/index';
 
 $route['loginPage'] ='Login/index';
+
+$route['UserStatus'] = 'Dashboard/UserStatus';
+
+$route['UserProfileSave']='User/UserProfileSave';
+
+$route['UserFriendList']='User/UserFriendList';
+
+$route['getProfile']='User/getProfile';
+
+$route['getBankDetails']='Bank_details/getBankDetails';
+
+$route['postBankDetails']='Bank_details/postBankDetails';

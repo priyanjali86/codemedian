@@ -21,7 +21,6 @@ class User_model extends CI_Model
     {
     return $this->db->get_where('usersdata',$fieldarray)->result_array();
     }
-        
     /*
      * Get all tbl_gw_master_milestone
      */
@@ -57,27 +56,25 @@ class User_model extends CI_Model
         return $this->db->delete('usersdata',array('PK_UserID'=>$PK_UserID));
     }
 
-    /*
-     * function to login user
-     */
-    function can_login($username,$password)
-    {
-        $this->db->where('Username',$username);
-        $this->db->where('Password',$password);
-        $this->db->where('IsActive', 1);
-        $this->db->where('IsDeleted', 0);
+    
+    // function can_login($username,$password)
+    // {
+    //     $this->db->where('Username',$username);
+    //     $this->db->where('Password',$password);
+    //     $this->db->where('IsActive', 1);
+    //     $this->db->where('IsDeleted', 0);
 
-        $query=$this->db->get('tbl_user_information');
+    //     $query=$this->db->get('tbl_user_information');
 
-        if($query->num_rows() > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //     if($query->num_rows() > 0)
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
 
     function can_Adminlogin($username,$password)
     {
@@ -101,6 +98,45 @@ class User_model extends CI_Model
     {
         $this->db->insert('tbl_user_information',$params);
         return $this->db->insert_id();
+    }
+
+    function displayrecords()
+    {
+        $this->db->select("Username,IsActive,Email_Address");
+        $this->db->from('tbl_user_information');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function get_all_tbl_user_profile_by_field($fieldarray)
+    {
+    return $this->db->get_where('tbl_user_information',$fieldarray)->result_array();
+    }
+
+    function update_tbl_user_profile($PK_UserID,$params)
+    {
+        $this->db->where('PK_UserID',$PK_UserID);
+        return $this->db->update('tbl_user_information',$params);
+    }
+
+    /*
+     * function to login user start
+     */
+
+    function get_login_user_info_by_field($fieldarray)
+    {
+    return $this->db->get_where('tbl_user_information',$fieldarray)->result_array();
+    }
+
+    /*
+     * function to login user end
+     */
+
+    function get_all_tbl_user_friend_list_by_field($fieldarray)
+    {
+        $sql = "SELECT * FROM `tbl_user_information` WHERE `PK_UserID` NOT IN (SELECT `FriendUserID` FROM `tbl_confirm_friend_list` WHERE (`FK_UserID`=$fieldarray OR `FriendUserID`=$fieldarray) AND Status = 'confirm') AND  PK_UserID NOT IN (SELECT `FK_UserID` FROM `tbl_confirm_friend_list` WHERE (`FK_UserID`=$fieldarray OR `FriendUserID`=$fieldarray) AND Status = 'confirm') AND PK_UserID NOT IN ($fieldarray)";
+        return $this->db->query($sql)->result_array();
+
     }
 
 }
