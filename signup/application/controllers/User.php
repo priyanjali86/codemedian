@@ -35,6 +35,7 @@ class User extends CI_Controller {
 
   public function index()
   {
+    $baseurl= $this->config->item('base_url');   
     $this->load->view('welcome_message');
   }
 
@@ -551,6 +552,8 @@ function getProfile()
         }
         else
         {
+          $baseurl= $this->config->item('base_url');
+          //echo $baseurl;
           $field=array('PK_UserID'=>$UserID);
           $user_profile=$this->User_model->get_all_tbl_user_profile_by_field($field);
           if(!empty($user_profile))
@@ -561,9 +564,10 @@ function getProfile()
             $FullName=$user_profile[0]['Full_Name'];
             $Address=$user_profile[0]['Address'];
             $ProfilePicturePath=$user_profile[0]['Profile_Picture_Path'];
+            $ProfilePicturePath=$ProfilePicturePath == "" ? "":$baseurl."".$ProfilePicturePath;
 
 
-
+//$baseurl."".
             // $field1=array('FK_UserID'=>$UserID);
             // $query=$this->Bank_Details_model->get_all_tbl_user_bank_details_by_field($field1);
             // $BankDetailsList=array();
