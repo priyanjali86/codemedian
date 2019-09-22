@@ -1,0 +1,35 @@
+page-history {
+
+    ion-navbar {background:$toolbarbg;border-bottom: 1px solid $toolbarbg;}
+    .toolbar-title {
+        color: #fff; text-transform: uppercase;
+        .ion-md-chatboxes{color: #fff;font-size:2.2rem;margin-left: 10px;}
+    }
+    .profileImage {background:$toolbarbg2;padding:17px 25px !important; margin:-16px -16px 0;padding:0 16px 0;display:flex;                 justify-content: flex-start;    
+                
+        .imgWrap {position:relative; background:url(../../assets/imgs/profile-image.jpg) no-repeat center top; background-size: cover;width:80px;height:80px;border-radius:50%;overflow: hidden;
+            button {position: absolute;bottom:9px;right:10px;background:transparent;
+            ion-icon {font-size:45px;color:#ce5232;}
+            }
+        }
+        ion-avatar {width:100%;overflow:hidden;height: 80px;;
+            img {display: inline-block;height:80px;transform: scale(1.1)}
+        }
+
+        .userInfo {padding-left: 20px;color:#fff;
+        ion-label {margin-top: 0px !important}
+        }
+        
+    }
+    .card {width: 100%!important;margin: 0 0 15px!important;background:#f1efef!important;
+        .card-header {padding:0 0 5px; font-weight: bold;color:#545454}
+        .card-content {color:#545454;padding:0 0 5px;font-size: 1.2rem;}
+        .options {display: flex;align-items: center;justify-content: center;
+        ion-icon {font-size: 3.2rem;}
+        }
+    }
+    .headings {padding:16px 0;color:#5c5c5c;
+    h5 {margin: 0 0 3px;color:#555}
+    }
+
+}

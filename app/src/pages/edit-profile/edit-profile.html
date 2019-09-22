@@ -1,0 +1,95 @@
+<!--
+  Generated template for the EditProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+      <!-- <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button> -->
+    <ion-title>Edit Profile</ion-title>
+    <button (click)="editProfile()" class="headerIcon"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="profileImage">
+    <div class="imgWrap">
+      <ion-avatar>
+        
+        <img [src]="showImage" alt="" *ngIf="isImageSelected">
+        <img src="{{editForm.images}}" alt="" *ngIf="editForm.isUpdate==0">
+  
+      </ion-avatar> 
+      
+    </div>
+    <button (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
+  </div>
+  
+  <!-- <div class="profileTitle">
+    <h3>Jessica Lee</h3>
+  </div> -->
+  <!-- <div class="editProfile">
+     <button (click)="editProfile()">Save Profile <ion-icon name="create" ></ion-icon></button> 
+  </div> -->
+  <ion-list class="profileInfo">
+  
+      <ion-item no-padding>
+        <ion-input type="text"  placeholder="Full Name" [(ngModel)]="editForm.fullname"></ion-input>
+      </ion-item>
+      <ion-item no-padding>
+          <ion-input type="number"  placeholder="Mobile" [(ngModel)]="editForm.phone" disabled="true"></ion-input>
+      </ion-item>
+      
+      <ion-item no-padding>
+        <ion-input type="text"  placeholder="City" [(ngModel)]="editForm.address"></ion-input>
+      </ion-item>
+      
+      <ion-item no-padding>
+        <ion-input type="email"  placeholder="Email" [(ngModel)]="editForm.email"></ion-input>
+      </ion-item>  
+      
+      <ion-item no-padding>
+        <ion-datetime #datePicker placeholder="DOB" displayFormat="DD/MM/YYYY" (ionCancel)="this.dataInicial  = null" [(ngModel)]="editForm.dob" doneText="Done" cancelText="Cancel" [max]="maxDate">
+        </ion-datetime>
+      </ion-item> 
+      
+       
+      <ion-item no-padding>
+        <ion-label>RelationShip Status</ion-label>
+        <ion-select placeholder="RelationShip Status" [(ngModel)]="editForm.RelationshipStatus">
+          <ion-option value="Proud to be Single">Proud to be Single</ion-option>
+          <ion-option value="Happily Married">Happily Married</ion-option>
+          <ion-option value="In a relationship">In a relationship</ion-option>
+          <ion-option value="Looking for someone">Looking for someone</ion-option>
+          <ion-option value="It's complicated">It's complicated</ion-option>
+          
+        </ion-select>
+      </ion-item>
+      <!-- <ion-item no-padding>
+        <ion-input type="password" [(ngModel)]="editForm.password"></ion-input>
+      </ion-item>    -->
+    </ion-list>
+  
+  
+    <!-- <div class="bankDetails">              
+          <button (click)="bankDetailModal()">ADD BANK DETAILS <ion-icon name="add"></ion-icon></button>    
+    </div> -->
+  
+    <!-- <div padding>No Bank Details</div> -->
+  
+    <!-- <div class="addedCards">
+      <ion-card>
+        <ion-card-header>
+          {{bankName}}
+        </ion-card-header>
+        <ion-card-content>
+          <span>Account Number</span>
+          <span>{{accountNumber}}</span>
+        </ion-card-content>
+      </ion-card>
+    </div> -->
+    
+  </ion-content>

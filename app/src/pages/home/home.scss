@@ -1,3 +1,12 @@
 page-home {
-
+.toolbar-title {color:#fff!important;}
+ion-searchbar {background:$toolbarbg2!important;}
+ion-navbar {width:15%!important;display:inline-block!important;min-height:auto !important;margin-bottom: -15px;}
+.searchbar-input {border-radius: 10px!important;height:50px!important;}
+.searchbar-search-icon {top:15px!important;}
+ion-navbar {background:$toolbarbg2;}
+.segment .segment-button {display: flex;flex-direction: column;height: auto;line-height: normal;background: #dc8406;color:#fff;
+margin:5px 3px 0;padding: 5px 0;flex:0 0 31%;border-radius: 7px;border:0px;opacity: 1;}
+.segment-md .segment-button ion-icon {line-height: normal!important;color:#fff}
+.segment .segment-button.segment-activated {background:#c94a38;}
 }

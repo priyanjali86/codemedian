@@ -1,0 +1,37 @@
+page-friend-list {
+.toolbar-title {color:#fff!important;}
+ion-searchbar {background:$toolbarbg2!important;}
+ion-navbar {width:15%!important;display:inline-block!important;min-height:auto !important;margin-bottom:0 !important;}
+.searchbar-input {border-radius: 10px!important;height:50px!important;}
+.searchbar-search-icon {top:15px!important;}
+ion-navbar {background:$toolbarbg2;}
+ion-item {background:transparent!important;border-bottom:1px solid #ccc !important;margin:5px 0 !important;
+    padding-left:0px!important;padding:0!important;width:100% !important;
+    .item-inner {border-bottom:0px !important;}
+    ion-note {color: #555!important;font-size: 1.2rem;margin: 0!important;}
+    ion-avatar {position:relative;
+        &:before {content:"";width: 10px;height: 10px; border-radius: 50%;background:#6ac510;position: absolute;right:0;
+            top: 30px;display: none}
+    }
+    h2 {text-transform: capitalize;}
+    button {background:transparent;margin-right:10px;padding:0px;color:#676767;font-size: 1.35rem;}
+}
+
+ion-list-header {background:$toolbarbg2!important;border-top:0px!important;color:#fff!important;padding-left:0px!important;
+.active {color:#87e42b;}
+.chat {display: inline-block;width:40%;text-align: center;font-weight: bold;font-size: 1.6rem;
+    span {background:#6ac510; width:25px;height:25px;border-radius: 50%;display:inline-block;text-align: center;line-height:25px;font-weight: normal;}
+}
+.status {display: inline-block;width:40%;text-align: center;font-weight: bold;font-size: 1.6rem;
+    span {background:#6ac510; width:25px;height:25px;border-radius: 50%;display:inline-block;text-align: center;line-height:25px;font-weight: normal;}
+}
+
+}
+.headerNav .label {display:flex;margin:0px;}
+.headerNav .label .segment-button {color:#fff; font-size: 1.5rem}
+.headerNav .label .segment-button.activated, .headerNav .label .segment-button.segment-activated {border-color:#fff;}
+.headerNav .toolbar {min-height: auto;}
+.userActions {display: flex;
+    p {font-size: 1.35rem;color: #676767;margin:0px;}
+    }
+}

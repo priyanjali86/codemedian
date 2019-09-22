@@ -1,0 +1,47 @@
+page-view-profile {
+
+    ion-navbar {background:$toolbarbg;}
+    .toolbar-title {
+        color: #fff; text-transform: uppercase;
+    }
+    .profileImage {/*background:url(../../assets/imgs/profile-bg.svg) no-repeat center -2px;background-size: 100%;*/
+        margin:-16px -16px 0;padding:0 16px 0;display:flex; justify-content: center;    
+                
+        .imgWrap {position:relative; background:url(../../assets/imgs/profile-image.jpg) no-repeat center top; background-size: cover;width:130px;height:130px;border-radius:50%;overflow: hidden;
+            button {position: absolute;bottom:9px;right:10px;background:transparent;
+            ion-icon {font-size:45px;color:#ce5232;}
+            }
+        }
+        ion-avatar {width:100%;overflow:hidden;height: 130px;;
+            img {display: inline-block;height:130px;width:100%;transform: scale(1.1)}
+        }
+        
+    }
+    .profileTitle {text-align: center;padding:15px 10px 10px;}
+    .profileInfo {background:transparent;
+        ion-item {background:transparent;
+            ion-label {font-size: 1.6rem !important;color:#000 !important;}
+            ion-input {margin:10px 0;}
+        }
+    }
+    
+    .editProfile {font-size: 1.8rem; font-weight: bold; margin: 10px 0;border-bottom: 1px solid #ccc;text-align: right;
+         padding-bottom: 10px;color:#555;
+         button {background:transparent;font-size: 1.8rem;font-weight: bold;color:#555;}
+         ion-icon {font-size: 1em;}
+        }
+    ion-list ion-item {border:0px!important;}
+    ion-list ion-item .item-inner {border-bottom:1px solid #bbb !important}
+    
+    .bankDetails {
+        button {background: #c94a38;color: #fff;padding:0 15px; width: 100%;display:flex; justify-content: space-between;
+            height:40px; align-items: center;
+            ion-icon {font-size: 1.5em;font-weight: bold;vertical-align: middle; margin-left: 5px;}
+            }
+    
+        } 
+    
+        .addedCards .card-content span {display:block;padding: 5px;font-size: 1.2rem;}
+    
+    }
+    

@@ -2,11 +2,21 @@
     ion-icon {font-weight: bold;}
 }
 
+//ion-modal {width:90%;height:90%;left:5%;top:5%;}
+ion-modal {padding:50px 20px;background:rgba(0, 0, 0, 0.911)}
+ion-select {max-width: 100%; width: 100%;margin-left: 0px;}
+.select {padding-left: 0px;}
 page-bank-detail {
+    ion-navbar {background:$toolbarbg;border-bottom: 1px solid $toolbarbg;}
+.toolbar-title {
+    color: #fff; text-transform: uppercase;padding-left: 16px;
+}
+.back-button.show-back-button {padding-right: 0px;color:#fff}
     .modal-wrapper  {
         width: 768px;
         height: 500px;
     }
+    .content {background:#fff}
 
     .bankDetailsFields {background:transparent;
         ion-item {background:transparent;
@@ -14,8 +24,8 @@ page-bank-detail {
         }
     }
 
-    .addBank {text-align: center;
-        button {padding:16px 35px; display: inline-block;width: auto;contain: none;
-            height: auto;background:#000;color: #fff;font-size: 1.4rem;margin-top:20px;}
+    .addBank {text-align: center;padding-left:0px;
+        button {padding:16px 25px; display: inline-block;width: auto;contain: none;
+            height: auto;background:#007faf;color:#fff;font-size: 1.4rem;margin-top:20px;}
     }
 }

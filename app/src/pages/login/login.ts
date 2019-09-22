@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
+import { NavController, NavParams } from 'ionic-angular';
 import { AppServiceProvider } from '../../providers/app-service/app-service';
 import { ProfilePage } from '../profile/profile';
-import { SignUpPage } from '../sign-up/sign-up';
+import { SignupPage } from '../signup/signup';
+import { TabsPage } from '../tabs/tabs';
+import { ViewProfilePage } from '../view-profile/view-profile';
+import { HomePage } from '../home/home';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -11,35 +14,44 @@ import { SignUpPage } from '../sign-up/sign-up';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  loginForm: any = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public appservice: AppServiceProvider) {
+  loginForm: any = {};
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+  constructor(public navCtrl: NavController, public navParams: NavParams, public appservice: AppServiceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+}
   loginAction() {
-    if (this.loginForm.username != '' && this.loginForm.username != null && this.loginForm.username != undefined && this.loginForm.password != '' && this.loginForm.password != null && this.loginForm.password != undefined) {
+    if (this.loginForm.phone != '' && this.loginForm.phone != null && this.loginForm.phone != undefined && isNaN(this.loginForm.phone)===false&& this.loginForm.password != '' && this.loginForm.password != null && this.loginForm.password != undefined) {
       console.log(this.loginForm);
-      let JSONdata = { UserName: this.loginForm.username, Password: this.loginForm.password }
+      
       let loadingPop = this.appservice.createLoadingBar();
       loadingPop.present();
-        this.appservice.login(this.appservice.BASE_URL + '/DoLoginUser', JSONdata).subscribe(res => {
+        this.appservice.login(this.appservice.BASE_URL + '/DoLoginUser', this.loginForm).subscribe(res => {
           console.log(res);
           if (res[0].ServiceStatus === 1) {
-            loadingPop.dismiss();           
-            this.navCtrl.setRoot(ProfilePage)
+            loadingPop.dismiss();   
+            localStorage.setItem('user_id',res[0].UserID);
+            localStorage.setItem('userName',res[0].FullName);
+            localStorage.setItem('userImg',res[0].ProfilePicturePath);
+            this.navCtrl.setRoot(TabsPage);
           }
           else
           {
             loadingPop.dismiss();
-          this.appservice.presentToast(res.ReturnMessage);
+            this.appservice.presentToast(res[0].ReturnMessage);
           }
         }, err => {
           loadingPop.dismiss();
@@ -55,7 +67,7 @@ export class LoginPage {
   }
   SignUpAction()
   {
-    this.navCtrl.push(SignUpPage)
+    this.navCtrl.push(SignupPage)
   }
 
 }

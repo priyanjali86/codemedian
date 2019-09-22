@@ -7,6 +7,10 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  homeseg: string = "shop";
+  isAndroid: boolean = false;
+
+
   constructor(public navCtrl: NavController) {
 
   }

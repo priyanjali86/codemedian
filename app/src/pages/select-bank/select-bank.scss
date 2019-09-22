@@ -1,0 +1,14 @@
+page-select-bank {
+    ion-navbar {background:$toolbarbg;}
+    ion-title {text-align: center;}
+    .back-button.show-back-button {padding-right: 0px;color:#fff}
+    .card-content{
+        h5 {font-size: 1.8rem;font-weight: bold;}
+        .ac {color: #999;}
+        .options {display: flex;align-items: center;}
+    } 
+    .actionBtn {
+        .btn {padding:0px;margin: 10px;}
+        .btn .button-inner {font-size: 1.5rem;padding: 15px;}
+    }
+}

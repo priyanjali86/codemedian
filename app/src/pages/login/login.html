@@ -5,38 +5,51 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
+  <!-- <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar> -->
 </ion-header>
 
 <ion-content padding>
-  <figure><img src="../../assets/imgs/logo.png" alt=""></figure>
+  <figure class="logo"><img src="../../assets/imgs/logo.svg" alt=""></figure>
  
-  <ion-list>
+  <ion-list class="loginBox"> 
+
+      <div class="socials">
+          <a href="#" class="fb"><img src="../../assets/imgs/facebook.svg" alt=""></a>
+          <a href="#" class="in"><img src="../../assets/imgs/linkedin.svg" alt=""></a>
+          <a href="#" class="tw"><img src="../../assets/imgs/twitter.svg" alt=""></a>
+        </div>
     
-        <ion-item class="loginputs">
-          <ion-label fixed>Username</ion-label>
-          <ion-input type="text" [(ngModel)]="loginForm.username"></ion-input>
-        </ion-item>
-    
-        <ion-item class="loginputs">
-          <ion-label fixed>Password</ion-label>
-          <ion-input type="password" [(ngModel)]="loginForm.password"></ion-input>
-        </ion-item>
-    
-      </ion-list>
-      <div padding class="forgot">
-        <span>At least 12 characters</span>
-        <a href="#">Forgot Password?</a>
-      </div>
-      <div padding>
-        <button ion-button color="primary" (click)="loginAction()">Sign In</button>
-      </div>
-      OR
-      <div padding>
-        <button ion-button color="primary" (click)="SignUpAction()">Sign Up</button>
-      </div>
+    <div class="or">
+      <span>OR</span>
+    </div>
+
+    <ion-item class="loginputs">
+      <ion-input placeholder="Phone Number" type="number" [(ngModel)]="loginForm.phone"></ion-input>
+    </ion-item>
+
+    <ion-item class="loginputs showPass">      
+      <ion-input placeholder="Password" [type]="passwordType" clearOnEdit="false" [(ngModel)]="loginForm.password"></ion-input>  
+      <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>    
+    </ion-item>
+
+   
+
+    <ion-item text-center class="loginBtn">
+      <button ion-button class="btn" color="primary" (click)="loginAction()">SignIn</button>
+    </ion-item>
+  </ion-list>
+
+  <div class="forgot">
+    <span>New to Optigoo? <a href="#" (click)="SignUpAction()"><strong>SIGNUP</strong></a></span>
+    <a href="#">Forgot Password?</a>
+  </div>
+  
+<!--   
+  <div padding>
+    <button ion-button color="dark" (click)="SignUpAction()">Sign Up</button>
+  </div> -->
       
 
 </ion-content>

@@ -1,33 +1,56 @@
 page-profile {
-
-.profileImage {display: flex;justify-content: center;
+// .content {background:url(../../assets/imgs/profile-bg.jpg) repeat-x 0 0;}
+ion-navbar {background:$toolbarbg;}
+.toolbar-title {
+    text-align: center;
+}
+.back-button.show-back-button {padding-right: 0px;color:#fff}
+.profileImage {/*background:url(../../assets/imgs/profile-bg.svg) no-repeat center -2px;background-size: 100%;*/
+    margin:-16px -16px 0;padding:0 16px 0;display:flex; justify-content: center;
     
-    img {display: inline-block;}
-    ion-avatar {width:200px;height: 200px;border-radius: 50%;overflow: hidden;}
-    .imgWrap {position:relative;
-        button {position: absolute;bottom:9px;right:-12px;background:transparent;
-        ion-icon {font-size:45px;color:#ce5232;}
+    .imgWrap {position:relative; background:url(../../assets/imgs/profile-image.jpg) no-repeat center top; background-size: cover;width:130px;height:130px;border-radius:50%;overflow: hidden;
+        button {position: absolute;bottom:34px;right:18px;background:transparent;
+        ion-icon {font-size:45px;color:rgba(255, 255, 255, 0.80);}
         }
+    }
+    ion-avatar {width:100%;overflow:hidden;height: 130px;;
+        img {display: inline-block;height:130px;width:100%;transform: scale(1.1)}
     }
     
 }
 .profileTitle {text-align: center;padding:15px 10px 10px;}
 .profileInfo {background:transparent;
-    ion-item {background:transparent;
-        ion-label {font-size: 1.6rem !important;color:#000 !important;}
+    ion-item {background:transparent;min-height: auto;
+        .item-inner {padding-right: 0px!important;}
+        ion-label {font-size: 1.5rem !important;color:#111 !important;margin:7px 0px;
+            span {float:right;background:#e10440;padding: 3px 5px;border-radius: 4px;color:#fff;}
+        }
+        ion-icon {font-size: 2.5rem;vertical-align: middle; margin-right: 5px; width: 30px;color:#222}
+        
     }
 }
 
-.editProfile {font-size: 1.8rem; font-weight: bold; margin: 10px 0;border-bottom: 1px solid #000;
-     padding-bottom: 10px;
+.editProfile {font-size: 1.8rem; font-weight: bold; margin: 10px 0;border-bottom: 1px solid #ccc;text-align: right;
+     padding-bottom: 10px;color:#555;
+     button {background:transparent;font-size: 1.8rem;font-weight: bold;color:#555;}
      ion-icon {font-size: 1em;}
     }
+ion-list ion-item {border:0px!important;}
+ion-list ion-item .item-inner {border-bottom:1px solid #bbb !important}
+ion-list ion-item:last-child .item-inner {border:0px !important;}
+.text-input {margin-bottom: 0px;}
 
 .bankDetails {
-    button {background: #000;color: #fff;padding:8px 15px;
+    button {background: #c94a38;color: #fff;padding:0 15px; width: 100%;display:flex; justify-content: space-between;
+        height:40px; align-items: center;
         ion-icon {font-size: 1.5em;font-weight: bold;vertical-align: middle; margin-left: 5px;}
         }
 
-    }
+    } 
 
+    .addedCards .card-content span {display:block;padding: 5px;font-size: 1.2rem;}
+    /**pn**/
+    .bar-button-default-md{
+        color: #fff!important;
+    }
 }

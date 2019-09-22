@@ -1,0 +1,64 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <!-- <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar> -->
+</ion-header>
+
+<ion-content padding>
+  <figure class="logo"><img src="../../assets/imgs/logo.svg" alt=""></figure>
+ 
+  <ion-list class="loginBox">  
+    <div class="heading">CREATE AN ACCOUNT</div> 
+      <ion-item class="loginputs">
+          <!-- <ion-label fixed>User Name</ion-label> -->
+          <ion-input placeholder="Full Name" type="text"  [(ngModel)]="signupForm.fullname"></ion-input>
+        </ion-item>
+    
+        <ion-item class="loginputs">
+          <!-- <ion-label fixed>Email</ion-label> -->
+          <ion-input placeholder="Email" type="email" [(ngModel)]="signupForm.email"></ion-input>
+        </ion-item>  
+    <ion-item class="loginputs">
+      <!-- <ion-label fixed>Phone Number</ion-label> -->
+      <ion-input type="number" placeholder="Phone Number" [(ngModel)]="signupForm.phone"></ion-input>
+    </ion-item>
+
+    <ion-item class="loginputs">
+      <!-- <ion-label fixed>Password</ion-label> -->
+      <ion-input placeholder="Password" type="password" [(ngModel)]="signupForm.password"></ion-input>
+    </ion-item>
+
+    <ion-item class="loginputs">
+      <!-- <ion-label fixed>Password</ion-label> -->
+      <ion-input placeholder="Confirm Password" type="password" [(ngModel)]="signupForm.cpassword"></ion-input>
+    </ion-item>
+    <ion-item class="loginputs">
+      <ion-datetime #datePicker placeholder="DOB" displayFormat="DD/MM/YYYY" (ionCancel)="this.dataInicial  = null" [(ngModel)]="signupForm.dob" doneText="Done" cancelText="Cancel" [max]="maxDate">
+      </ion-datetime>
+    </ion-item> 
+    
+     
+    <ion-item class="loginputs">
+      <!-- <ion-label>RelationShip Status</ion-label> -->
+      <ion-select placeholder="RelationShip Status" [(ngModel)]="signupForm.RelationshipStatus">
+        <ion-option value="Married">Married</ion-option>
+        <ion-option value="Single">Single</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item text-center class="loginBtn">
+      <button ion-button class="btn" color="primary" (click)="signUpAction()">Signup</button>
+    </ion-item>
+    
+  </ion-list>      
+  <div class="forgot">
+    <span>If you have an account, Just <a href="#" (click)="GoToLoginAction()"><strong>SIGNIN</strong></a></span>
+    <!-- <a href="#">Forgot Password?</a> -->
+  </div>
+
+</ion-content>

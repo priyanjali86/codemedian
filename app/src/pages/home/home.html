@@ -1,17 +1,42 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+<ion-searchbar></ion-searchbar>  
+<ion-toolbar no-border-top>
+  <ion-segment [(ngModel)]="homeseg">
+    <ion-segment-button value="shop">
+      <ion-icon name="cart"></ion-icon>
+      Shop
+    </ion-segment-button>    
+    <ion-segment-button value="favourites">
+      <ion-icon name="heart"></ion-icon>
+      Favourites
+    </ion-segment-button>
+    <ion-segment-button value="notifications">
+      <ion-icon name="notifications-outline"></ion-icon>
+      Notifications
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <div [ngSwitch]="homeseg">
+    <ion-list *ngSwitchCase="'shop'">
+      <ion-item>
+        <h1>Shop</h1>
+      </ion-item>      
+    </ion-list>    
+
+    <ion-list *ngSwitchCase="'favourites'">
+      <ion-item>
+        <h1>Favourites</h1>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'notifications'">
+      <ion-item>
+        <h1>Notifications</h1>
+      </ion-item>
+    </ion-list>
+  </div>
+  
 </ion-content>

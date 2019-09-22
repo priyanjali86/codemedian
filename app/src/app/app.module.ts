@@ -15,7 +15,19 @@ import { LoginPage } from '../pages/login/login';
 import { AppServiceProvider } from '../providers/app-service/app-service';
 import { ProfilePage } from '../pages/profile/profile';
 import { BankDetailPage } from '../pages/bank-detail/bank-detail';
-import { SignUpPage } from '../pages/sign-up/sign-up';
+import { SignupPage } from '../pages/signup/signup';
+import { ViewProfilePage } from '../pages/view-profile/view-profile';
+import {EditProfilePage} from '../pages/edit-profile/edit-profile';
+import { Camera } from '@ionic-native/camera';
+import { FriendListPage } from '../pages/friend-list/friend-list';
+import { FriendProfilePage } from '../pages/friend-profile/friend-profile';
+import { HistoryPage } from '../pages/history/history';
+import { WalletPage } from '../pages/wallet/wallet';
+import { SelectBankPage } from '../pages/select-bank/select-bank';
+import { BankListPage } from '../pages/bank-list/bank-list';
+import { EmojiProvider } from '../providers/emoji';
+import { UserListPage } from '../pages/user-list/user-list';
+import { FriendRequestPage } from '../pages/friend-request/friend-request';
 
 @NgModule({
   declarations: [
@@ -27,7 +39,17 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
     LoginPage,
     ProfilePage,
     BankDetailPage,
-    SignUpPage
+    SignupPage,
+    ViewProfilePage,
+    EditProfilePage,
+    FriendListPage,
+    FriendProfilePage,
+    HistoryPage,
+    WalletPage,
+    SelectBankPage,
+    BankListPage,
+    UserListPage,
+    FriendRequestPage
   ],
   imports: [
     BrowserModule,HttpClientModule,
@@ -43,13 +65,25 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
     LoginPage,
     ProfilePage,
     BankDetailPage,
-    SignUpPage
+    SignupPage,
+    ViewProfilePage,
+    EditProfilePage,
+    FriendListPage,
+    FriendProfilePage,
+    HistoryPage,
+    WalletPage,
+    SelectBankPage,
+    BankListPage,
+    UserListPage,
+    FriendRequestPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},    
-    AppServiceProvider
+    AppServiceProvider,
+    EmojiProvider
   ]
 })
 export class AppModule {}

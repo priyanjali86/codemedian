@@ -26,6 +26,7 @@ class User extends CI_Controller {
   function __construct()
         {
           parent::__construct();
+          $this->load->model('Basic_model');
           $this->load->model('User_model');
           $this->load->model('Bank_Details_model');
           
@@ -214,7 +215,8 @@ class User extends CI_Controller {
       $Email_Address="";
       $Full_Name="";
       $Address="";            
-
+$DOB="";
+$Nationality="";
       $PictureFileBase64="";
       $FileName="";
       $IsUpdatePicture="";
@@ -233,6 +235,8 @@ class User extends CI_Controller {
         $Email_Address=$_POST['Email_Address'] =  isset($request->EmailAddress)?$request->EmailAddress:"";
         $Full_Name=$_POST['Full_Name'] =  isset($request->FullName)?$request->FullName:"";            
         $Address=$_POST['Address'] =  isset($request->Address)?$request->Address:"";
+        $DOB=$_POST['DOB'] =  isset($request->DOB)?$request->DOB:"";
+        $RelationshipStatus=$_POST['RelationshipStatus'] =  isset($request->RelationshipStatus)?$request->RelationshipStatus:"";
         // $Bank_Name=$_POST['Bank_Name'] =  isset($request->BankName)?trim($request->BankName):"";
         // $Bank_Holder_Name=$_POST['Bank_Holder_Name'] =  isset($request->BankHolderName)?trim($request->BankHolderName):"";
         // $Account_Type=$_POST['Account_Type'] =  !empty($request->AccountType)?$request->AccountType:"";           
@@ -308,6 +312,8 @@ class User extends CI_Controller {
                   'Email_Address' => $Email_Address,
                   'Full_Name' => $Full_Name,
                   'Address' => $Address,
+                  'DOB'=>$DOB,
+                  'RelationshipStatus'=>$RelationshipStatus
                   // 'Bank_Name' => $Bank_Name,
                   // 'Bank_Holder_Name' => $Bank_Holder_Name,
                   // 'Account_Type' => $Account_Type,
@@ -373,6 +379,77 @@ class User extends CI_Controller {
       }
   }
 
+function UserFriendList()
+{
+  $UserID=0;
+  $FriendList="";
+
+  $ServiceStatus = 0;
+  $ReturnMessage = "";
+
+ $postdata = file_get_contents("php://input");
+      if (isset($postdata))
+      {
+        $request = json_decode($postdata);
+
+        $UserID=$_POST['FK_User_ID'] =  isset($request->UserID)?$request->UserID:"";
+
+        $fieldarray=array('PK_UserID'=>$UserID);
+        $user=$this->User_model->get_all_tbl_user_profile_by_field($fieldarray);
+
+        if(empty($user))
+        {
+          $ServiceStatus=0;
+          $ReturnMessage="user does not exits";
+        }
+        else
+        {
+          $ServiceStatus=1;
+          $ReturnMessage="Show User Friend List";
+          //$fieldarray1=array('PK_UserID'=>$UserID);
+          $userfriendlist=$this->User_model->get_all_tbl_user_friend_list_by_field($UserID);
+          $FriendList=array();
+
+          foreach ($userfriendlist as $row)
+          {
+
+              $Friend_UserID=$row['PK_UserID'];
+              $Friend_UserName=$row['Username'];
+              $Friend_MobileNo=$row['Mobile_Number'];
+              $Friend_Email=$row['Email_Address'];
+              $Friend_Full_Name=$row['Full_Name'];
+              $Friend_Address=$row['Address'];
+              $Friend_Profile_Picture=$row['Profile_Picture_Path'];
+                $jsonarray = array(
+                    'FriendUserID' => $Friend_UserID,
+                    'FriendUserName' => $Friend_UserName,
+                    'FriendMobileNo' => $Friend_MobileNo,
+                    'FriendEmail' => $Friend_Email,
+                    'FriendFullName' => $Friend_Full_Name,
+                    'FriendAddress' => $Friend_Address,
+                    'FriendProfilePicture' => $Friend_Profile_Picture,
+                );
+              array_push($FriendList, $jsonarray);       
+        
+          }
+          
+        }
+
+        $json = array();
+      $jsonarray = array( 
+        'ServiceStatus'=>$ServiceStatus,
+        'ReturnMessage'=>$ReturnMessage,                             
+        'UserFriendList'=>$FriendList                   
+      );
+
+      array_push($json, $jsonarray);   
+      $jsonstring = json_encode($json);
+      echo $jsonstring;
+      die();
+
+      }
+
+}
 
        function update_profile_picture($UserID,$FileName,$Base64File)
      {
@@ -449,78 +526,6 @@ class User extends CI_Controller {
   $this->User_model->update_tbl_user_profile($UserID,$params);
 }
 
-function UserFriendList()
-{
-  $UserID=0;
-  $FriendList="";
-
-  $ServiceStatus = 0;
-  $ReturnMessage = "";
-
-  $postdata = file_get_contents("php://input");
-      if (isset($postdata))
-      {
-        $request = json_decode($postdata);
-
-        $UserID=$_POST['FK_User_ID'] =  isset($request->UserID)?$request->UserID:"";
-
-        $fieldarray=array('PK_UserID'=>$UserID);
-        $user=$this->User_model->get_all_tbl_user_profile_by_field($fieldarray);
-
-        if(empty($user))
-        {
-          $ServiceStatus=0;
-          $ReturnMessage="user does not exits";
-        }
-        else
-        {
-          $ServiceStatus=1;
-          $ReturnMessage="Show User Friend List";
-          //$fieldarray1=array('PK_UserID'=>$UserID);
-          $userfriendlist=$this->User_model->get_all_tbl_user_friend_list_by_field($UserID);
-          $FriendList=array();
-
-          foreach ($userfriendlist as $row)
-          {
-
-              $Friend_UserID=$row['PK_UserID'];
-              $Friend_UserName=$row['Username'];
-              $Friend_MobileNo=$row['Mobile_Number'];
-              $Friend_Email=$row['Email_Address'];
-              $Friend_Full_Name=$row['Full_Name'];
-              $Friend_Address=$row['Address'];
-              $Friend_Profile_Picture=$row['Profile_Picture_Path'];
-                $jsonarray = array(
-                    'FriendUserID' => $Friend_UserID,
-                    'FriendUserName' => $Friend_UserName,
-                    'FriendMobileNo' => $Friend_MobileNo,
-                    'FriendEmail' => $Friend_Email,
-                    'FriendFullName' => $Friend_Full_Name,
-                    'FriendAddress' => $Friend_Address,
-                    'FriendProfilePicture' => $Friend_Profile_Picture,
-                );
-              array_push($FriendList, $jsonarray);       
-        
-          }
-          
-        }
-
-        $json = array();
-      $jsonarray = array( 
-        'ServiceStatus'=>$ServiceStatus,
-        'ReturnMessage'=>$ReturnMessage,                             
-        'UserFriendList'=>$FriendList                   
-      );
-
-      array_push($json, $jsonarray);   
-      $jsonstring = json_encode($json);
-      echo $jsonstring;
-      die();
-
-      }
-
-}
-
 function getProfile()
 {
       $UserID = "";
@@ -531,6 +536,8 @@ function getProfile()
       $FullName="";
       $Address="";
       $ProfilePicturePath="";
+      $DOB="";
+      $RelationshipStatus="";
 
       //$BankDetailsList="";          
 
@@ -563,6 +570,8 @@ function getProfile()
             $EmailAddress=$user_profile[0]['Email_Address'];
             $FullName=$user_profile[0]['Full_Name'];
             $Address=$user_profile[0]['Address'];
+            $DOB=$user_profile[0]['DOB'];
+            $RelationshipStatus=$user_profile[0]['RelationshipStatus'];
             $ProfilePicturePath=$user_profile[0]['Profile_Picture_Path'];
             $ProfilePicturePath=$ProfilePicturePath == "" ? "":$baseurl."".$ProfilePicturePath;
 
@@ -611,6 +620,8 @@ function getProfile()
         'EmailAddress'=>$EmailAddress,
         'FullName'=>$FullName,
         'Address'=>$Address,
+        'DOB'=>$DOB,
+        'RelationshipStatus'=>$RelationshipStatus,
         'ProfilePicturePath'=>$ProfilePicturePath,
         //'BankDetails'=>$BankDetailsList,
                     
@@ -623,5 +634,276 @@ function getProfile()
 
     }
 }
+  public function postFriendRequest(){
+    $ServiceStatus = 0;
+    $ReturnMessage = "";
+    $userId = $this->input->get('UserID');
+    $friendId = $this->input->get('FriendID');
+    if($userId && $friendId){
+      $isExist = $this->Basic_model->isRecordExist('tbl_user_information', 'isActive=0 and (PK_UserID="'.$userId.'" OR PK_UserID = "'.$friendId.'")', '', '');
+      if(!$isExist){
+        $isExist = $this->Basic_model->isRecordExist('tbl_confirm_friend_list', '(FK_UserID="'.$friendId.'" And FriendUserID="'.$userId.'") OR (FK_UserID="'.$userId.'" And FriendUserID="'.$friendId.'")', '', '');
+        if(!$isExist){
+          $ServiceStatus = 1;
+          $ReturnMessage = 'Request sent Successfully';
+          $Annonymous = array();
+          $Annonymous['FK_UserID'] = $userId;
+          $Annonymous['FriendUserID'] = $friendId;
+          $i = $this->Basic_model->recordInsert('tbl_confirm_friend_list', $Annonymous);
+        }else{
+          $ReturnMessage = 'Request is already exist';
+        }
+      }else{
+        $ReturnMessage = 'User is not active';
+      }
+    }else{
+      $ReturnMessage = 'User is missing';
+    }
+    $json = array();
+    $jsonarray = array( 
+      'ServiceStatus'=>$ServiceStatus,
+      'ReturnMessage'=>$ReturnMessage                   
+    );
+
+    array_push($json, $jsonarray);   
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+  } 
+  public function getPendingRequests(){
+    $ServiceStatus = 0;
+    $ReturnMessage = "";
+    $pendingList = array();
+    $userId = $this->input->get('UserID');
+    if($userId){
+      $isExist = $this->Basic_model->isRecordExist('tbl_user_information', 'isActive=0 and PK_UserID="'.$userId.'"', '', '');
+      if(!$isExist){
+        $ServiceStatus = 1;
+        $ReturnMessage = 'No Pendings';
+        $sql = 'SELECT u.PK_UserID as FriendID,u.Full_Name,u.Profile_Picture_Path,f.PK_confirm_friend_listID as friend_listID FROM tbl_confirm_friend_list as f,tbl_user_information as u WHERE u.PK_UserID=f.FK_UserID AND f.Status="pending" AND f.FriendUserID = '.$userId;
+        $rs  = $this->db->query($sql);
+        if ($rs->num_rows() > 0) {
+          $ReturnMessage = '';
+          $pendingList = $rs->result_array();
+        }
+      }else{
+        $ReturnMessage = 'User is not active';
+      }
+    }else{
+      $ReturnMessage = 'User is missing';
+    }
+    $json = array();
+    $jsonarray = array( 
+      'ServiceStatus'=>$ServiceStatus,
+      'ReturnMessage'=>$ReturnMessage,
+      'PendingList'=>$pendingList                   
+    );
+
+    array_push($json, $jsonarray);   
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+  }
+ 
+  public function approvePendingRequests(){
+    $ServiceStatus = 0;
+    $ReturnMessage = "";
+    $pendingList = array();
+    $userId = $this->input->get('UserID');
+    $friend_listID = $this->input->get('friend_listID');
+    if($userId){
+      $isExist = $this->Basic_model->isRecordExist('tbl_user_information', 'isActive=0 and PK_UserID="'.$userId.'"', '', '');
+      if(!$isExist){
+        $ServiceStatus = 1;
+        $isExist = $this->Basic_model->isRecordExist('tbl_confirm_friend_list', 'PK_confirm_friend_listID="'.$friend_listID.'" and FriendUserID="'.$userId.'" and Status="pending"', '', '');
+        if($isExist){
+          $updateArray = array();
+          $updateArray['Status'] = 'confirm';
+          $i = $this->Basic_model->recordUpdate('tbl_confirm_friend_list', $updateArray, 'PK_confirm_friend_listID="'.$friend_listID.'" and FriendUserID="'.$userId.'" and Status="pending"');          
+          $ReturnMessage = 'Approved';
+        }else{
+          $ReturnMessage = 'No pending requests';
+        }
+      }else{
+        $ReturnMessage = 'User is not active';
+      }
+    }else{
+      $ReturnMessage = 'User is missing';
+    }
+    $json = array();
+    $jsonarray = array( 
+      'ServiceStatus'=>$ServiceStatus,
+      'ReturnMessage'=>$ReturnMessage              
+    );
+
+    array_push($json, $jsonarray);   
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+  }
+public function saveChatData()
+{
+        $msg = "";
+
+
+
+        $postdata = file_get_contents("php://input");
+
+        if (isset($postdata))
+
+        {
+
+            $request = json_decode($postdata);
+
+
+           
+                $params = array(
+
+                
+                   'msg' => json_encode($request->msg),
+
+                    'user_id' => $request->UserID,   
+
+                    'friend_id' => $request->FriendID
+
+
+                );
+
+
+
+                $UserID= $this->User_model->add_tbl_chat_history($params);   
+
+
+
+                $ServiceStatus=1;
+
+                $ReturnMessage="chat saved";
+
+            $json = array();
+
+            $jsonarray = array(                       
+
+                        'ServiceStatus'=>$ServiceStatus,                       
+
+                        'ReturnMessage'=>$ReturnMessage,                        
+
+                        );
+
+            array_push($json, $jsonarray);   
+
+            $jsonstring = json_encode($json);
+
+            echo $jsonstring;
+
+            die();
+
+        }
+}
+ public function getAllUsers(){
+    $ServiceStatus = 0;
+    $ReturnMessage = "";
+    $usersList = array();
+    $userId = $this->input->get('UserID');
+    if($userId){
+      $isExist = $this->Basic_model->isRecordExist('tbl_user_information', 'isActive=0 and PK_UserID="'.$userId.'"', '', '');
+      if(!$isExist){
+        $ServiceStatus = 1;
+        $ReturnMessage = 'No Users';
+      $sql = "SELECT u.PK_UserID as UserID,u.Full_Name,u.Profile_Picture_Path,IFNULL(t1.is_friend,0) as isFriend,IFNULL(t2.is_pending,0) as isPending,IFNULL(t3.is_approve,0) as needToApprove,IFNULL(t3.friend_listID,0) as friend_listID FROM tbl_user_information as u LEFT JOIN (SELECT f.FK_UserID as users,1 as is_friend FROM tbl_confirm_friend_list as f WHERE f.FriendUserID = ".$userId." and f.Status = 'confirm' UNION SELECT f.FriendUserID as users,1 as is_friend FROM tbl_confirm_friend_list as f WHERE f.FK_UserID = ".$userId." and f.Status = 'confirm') as t1 on u.PK_UserID = t1.users LEFT JOIN (SELECT 1 as is_pending,f.FK_UserID as friendId FROM tbl_confirm_friend_list as f WHERE f.Status='pending' AND f.FriendUserID = ".$userId." UNION SELECT 1 as is_pending,f.FriendUserID as friendId FROM tbl_confirm_friend_list as f WHERE f.FK_UserID = ".$userId." and f.Status='pending') as t2 on u.PK_UserID = t2.friendId LEFT JOIN (SELECT 1 as is_approve,f.FK_UserID as friendId,f.PK_confirm_friend_listID as friend_listID FROM tbl_confirm_friend_list as f WHERE f.Status='pending' AND f.FriendUserID = ".$userId.") as t3 on u.PK_UserID = t3.friendId WHERE u.IsActive=1 AND u.PK_UserID!=".$userId;
+        $rs  = $this->db->query($sql);
+        if ($rs->num_rows() > 0) {
+          $ReturnMessage = '';
+          $usersList = $rs->result_array();
+        }
+      }else{
+        $ReturnMessage = 'User is not active';
+      }
+    }else{
+      $ReturnMessage = 'User is missing';
+    }
+    $json = array();
+    $jsonarray = array( 
+      'ServiceStatus'=>$ServiceStatus,
+      'ReturnMessage'=>$ReturnMessage,
+      'UsersList'=>$usersList                   
+    );
+
+    array_push($json, $jsonarray);   
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+  }
+public function chatlist()
+{
+      $UserID = "";
+      $FriendID="";
+      $msg=""; 
+      $ServiceStatus = 0;
+      $ReturnMessage = "";
+
+      $postdata = file_get_contents("php://input");
+      if (isset($postdata))
+      {
+        $request = json_decode($postdata);        
+        
+        $UserID=$_POST['UserID'] =  isset($request->UserID)?$request->UserID:"";
+        $FriendID=$_POST['FriendID'] =  isset($request->FriendID)?$request->FriendID:"";
+
+        if(empty($UserID))
+        {
+          $ServiceStatus=0;
+          
+          $ReturnMessage="Invalid User";
+        }
+        else
+        {
+          $baseurl= $this->config->item('base_url');
+          //echo $baseurl;
+        
+          $user_profile=$this->User_model->get_all_chat_data_by_id($UserID,$FriendID);
+          $ChatList=array();
+
+          foreach ($user_profile as $row)
+          {
+
+              $msg=json_decode($row['msg']);
+
+            
+              array_push($ChatList, $msg);       
+        
+          }
+          if(!empty($user_profile))
+          {
+          
+          $ServiceStatus=1;
+          $ReturnMessage="Chat List";
+          
+          }
+          else
+          {
+            $ServiceStatus=0;
+            $ReturnMessage="data does not exist"; 
+          }
+
+        }
+
+
+ 
+
+ $json = array();
+      $jsonarray = array( 
+        'ServiceStatus'=>$ServiceStatus,
+        'ReturnMessage'=>$ReturnMessage,                             
+        'ChatList'=>$ChatList                   
+      );
+
+      array_push($json, $jsonarray);   
+      $jsonstring = json_encode($json);
+      echo $jsonstring;
+      die();
+
+
+    }
+}
+
+public function deleteFriendlist()
+{
   
+}
 }

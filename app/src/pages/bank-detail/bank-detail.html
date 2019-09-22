@@ -6,46 +6,47 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Bank Detail</ion-title>
-    <button ion-button color="dark" icon-only (click)="closeModal()">
-      <ion-icon item-right name="ios-close-outline"></ion-icon>
-  </button>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Bank Details</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list class="bankDetailsFields">
   <p>Enter your bank details below</p>
-    <ion-item>
-      <ion-label stacked>Bank Name</ion-label>
-      <ion-input type="text" value=""></ion-input>
+    <ion-item no-padding>
+      <ion-label >Bank Name</ion-label>
+      <!-- <ion-input placeholder="Bank Name" type="text" value="" [(ngModel)]="editForm.bankName"></ion-input> -->
     </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Bank Holder Name</ion-label>
-      <ion-input type="text" value=""></ion-input>
+    <ion-item no-padding>
+      <ion-label stacked>Account Holder Name</ion-label>
+      <!-- <ion-input placeholder="Bank Holder Name" type="text" value="" [(ngModel)]="editForm.bankHolderName"></ion-input> -->
     </ion-item>
   
-    <ion-item>
-      <ion-label  stacked>Account Type</ion-label>
-      <ion-select [(ngModel)]="account">
+    <ion-item no-padding>
+      <!-- <ion-label  stacked>Account Type</ion-label> -->
+      <ion-select placeholder="Account Type" [(ngModel)]="editForm.accountType">
         <ion-option value="savings">Savings</ion-option>
         <ion-option value="current">Current</ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-item>
+    <ion-item no-padding>
         <ion-label stacked>Account Number</ion-label>
-        <ion-input type="number"></ion-input>
+        <!-- <ion-input placeholder="Account Number" type="number" [(ngModel)]="editForm.accountNumber"></ion-input> -->
     </ion-item>
 
-    <ion-item>
+    <ion-item no-padding>
       <ion-label  stacked>IFSC Code</ion-label>
-      <ion-input type="text"></ion-input>
+      <!-- <ion-input placeholder="IFSC Code" type="text"[(ngModel)]="editForm.IFSCCode"></ion-input> -->
     </ion-item>
 
     <ion-item class="addBank">
-      <button>ADD BAK</button>
+      <button class="btn" color="primary" (click)="addBank()">ADD BANK</button>
+      <button class="btn" color="primary" (click)="closeModal()">CANCEL</button>
     </ion-item>
 
    </ion-list>

@@ -1,0 +1,64 @@
+<!--
+  Generated template for the FrienProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{fullname}}</ion-title> 
+    <button class="headerIcon"><ion-icon name="text"></ion-icon></button>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content padding>
+  <div class="profileImage">
+    <div class="imgWrap">
+      <ion-avatar>
+        <img src="../../assets/imgs/profile-image.jpg" alt="">
+      </ion-avatar> 
+      <!-- <button (click)="presentActionSheet()"><ion-icon name="add-circle"></ion-icon></button> -->
+    </div>
+  </div>
+  
+  <!-- <div class="profileTitle">
+    <h3>Jessica Lee</h3>
+  </div> -->
+  <div class="friendStatus">
+     <!-- <h4>STATUS</h4> --> Active 14 Minutes Ago 
+  </div>
+  <ion-list class="profileInfo">
+  
+      <ion-item no-padding>
+        <ion-label>{{fullname}}</ion-label>
+       
+      </ion-item>
+      <ion-item no-padding>
+        <ion-label>{{phone}}</ion-label>
+        
+      </ion-item>
+      
+      <ion-item no-padding *ngIf="address!=''">
+        <ion-label>{{address}}</ion-label>
+        
+      </ion-item>
+      
+      <ion-item no-padding *ngIf="email!=''">
+        <ion-label>{{email}}</ion-label>
+       
+      </ion-item>   
+      <ion-item no-padding *ngIf="dob!=''">
+        <ion-label>{{dob}}</ion-label>
+       
+      </ion-item>
+      <ion-item no-padding *ngIf="relationshipStatus!=''">
+        <ion-label>{{relationshipStatus}}</ion-label>
+       
+      </ion-item>
+      
+    </ion-list>
+  
+    <div class="shopping" (click)="historyAction()"><h4>SHOPPING HISTORY</h4>  <span class="historyOn"></span></div>
+    
+  </ion-content>

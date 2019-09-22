@@ -6,75 +6,81 @@
 -->
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle>
+      <!-- <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title>My Profile</ion-title>
+        </button> -->
+    <ion-title>{{editForm.fullname}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 <div class="profileImage">
   <div class="imgWrap">
-    <ion-avatar>
-      <img src="../../assets/imgs/profile-image.jpg" alt="">
+    <ion-avatar>      
+      <img src="{{editForm.images}}" alt="" *ngIf="editForm.isUpdate==0">
     </ion-avatar> 
-    <button block><ion-icon name="add-circle"></ion-icon></button>
+   
   </div>
 </div>
 
-<div class="profileTitle">
-  <h3>Jessica Lee</h3>
-</div>
-<div class="editProfile">
-    <ion-icon name="create"></ion-icon> Edit Profile
-</div>
-<ion-list class="profileInfo">
+<!-- <div class="editProfile">
+   <button (click)="editProfile()">Save Profile <ion-icon name="create" ></ion-icon></button> 
+</div> -->
+<ion-list class="profileInfo profileList">
 
-    <ion-item>
-      <ion-label stacked>Name</ion-label>
-      <ion-input type="text" value=""></ion-input>
+    <ion-item no-padding (click)="gotoViewProfile()">
+      <ion-icon name="person"></ion-icon> Profile 
     </ion-item>
-  
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input type="email"></ion-input>
+    <ion-item no-padding (click)="userListAction()">
+        <ion-icon name="contacts"></ion-icon> User List <!--span>55</span-->
     </ion-item>
-
-    <ion-item>
-        <ion-label stacked>Mobile</ion-label>
-        <ion-input type="number"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label  stacked>Address</ion-label>
-      <ion-textarea rows="3" cols="20"></ion-textarea>
-    </ion-item>
-
     
-
+    <!-- <ion-item no-padding (click)="frndListAction()">
+        <ion-icon name="text"></ion-icon> Chat <span>5 Active</span>
+    </ion-item> -->
     
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label stacked>City</ion-label>
-                <ion-input type="text" value=""></ion-input>
-              </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label stacked>Zip</ion-label>
-                <ion-input type="text" value=""></ion-input>
-              </ion-item>
-        </ion-col>
-      </ion-row>
-  
+    <ion-item no-padding>
+        <ion-icon name="share"></ion-icon> Share
+    </ion-item>   
+
+    <ion-item no-padding (click)="walletAction()">
+      <ion-icon name="card"></ion-icon> Wallet <!--span>500.00</span-->
+    </ion-item>
+
+    <ion-item no-padding (click)="bankListAction()">
+      <ion-icon name="information-circle"></ion-icon> Bank 
+    </ion-item>
+
+    <!-- <ion-item no-padding>
+        <ion-icon name="notifications"></ion-icon> Notifications <span>3</span>
+    </ion-item> -->
+
+    <ion-item no-padding>
+        <ion-icon name="cog"></ion-icon> Settings
+    </ion-item>
+
+    <ion-item no-padding (click)="logout()">
+        <ion-icon name="log-out"></ion-icon> Logout
+    </ion-item>
   </ion-list>
 
 
-  <div class="bankDetails">              
-        <button (click)="bankDetailModal()">ADD BANK DETAILS <ion-icon name="add"></ion-icon></button>
-     
-  </div>
+  <!-- <div class="bankDetails">              
+        <button (click)="bankDetailModal()">ADD BANK DETAILS <ion-icon name="add"></ion-icon></button>    
+  </div> -->
 
+  <!-- <div padding>No Bank Details</div> -->
+
+  <!-- <div class="addedCards">
+    <ion-card>
+      <ion-card-header>
+        {{bankName}}
+      </ion-card-header>
+      <ion-card-content>
+        <span>Account Number</span>
+        <span>{{accountNumber}}</span>
+      </ion-card-content>
+    </ion-card>
+  </div> -->
+  
 </ion-content>

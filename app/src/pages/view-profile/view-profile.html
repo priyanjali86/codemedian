@@ -1,0 +1,84 @@
+<!--
+  Generated template for the ViewProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Profile</ion-title>
+    <button (click)="editProfile()" class="headerIcon"><ion-icon name="create"></ion-icon></button>
+    <!-- <ion-icon ios="ios-log-out" md="md-log-out" (click)="logout()" style="font-size:1.8em;margin-right: 16px;color:#fff;font-weight:normal;"></ion-icon> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="profileImage">
+    <div class="imgWrap">
+      <ion-avatar>
+        <img src="{{images}}" alt="">
+      </ion-avatar> 
+      <!-- <button (click)="presentActionSheet()"><ion-icon name="add-circle"></ion-icon></button> -->
+    </div>
+  </div>
+  
+  <!-- <div class="profileTitle">
+    <h3>Jessica Lee</h3>
+  </div> -->
+  <!-- <div class="editProfile">
+     <button (click)="editProfile()">Edit Profile <ion-icon name="create" ></ion-icon></button> 
+  </div> -->
+  <ion-list class="profileInfo">
+  
+      <ion-item no-padding>
+        <ion-label>Name: {{fullname}}</ion-label>
+       
+      </ion-item>
+      <ion-item no-padding>
+        <ion-label>Phone: {{phone}}</ion-label>
+        
+      </ion-item>
+      
+      <ion-item no-padding *ngIf="address!=''">
+        <ion-label>City: {{address}}</ion-label>
+        
+      </ion-item>
+      
+      <ion-item no-padding *ngIf="email!=''">
+        <ion-label>Email: {{email}}</ion-label>
+       
+      </ion-item>
+      
+      <ion-item no-padding *ngIf="dob!=''">
+        <ion-label>DOB: {{dob}}</ion-label>
+       
+      </ion-item>
+      <ion-item no-padding *ngIf="relationshipStatus!=''">
+        <ion-label>Relationship Status: {{relationshipStatus}}</ion-label>
+       
+      </ion-item>
+      <!-- <ion-item no-padding>
+        <ion-input type="password" [(ngModel)]="editForm.password"></ion-input>
+      </ion-item>    -->
+    </ion-list>
+  
+  
+    <!-- <div class="bankDetails">              
+          <button (click)="bankDetailModal()">ADD BANK DETAILS <ion-icon name="add"></ion-icon></button>    
+    </div> -->
+  
+    <!-- <div padding>No Bank Details</div> -->
+  
+    <!-- <div class="addedCards">
+      <ion-card>
+        <ion-card-header>
+          {{bankName}}
+        </ion-card-header>
+        <ion-card-content>
+          <span>Account Number</span>
+          <span>{{accountNumber}}</span>
+        </ion-card-content>
+      </ion-card>
+    </div> -->
+    
+  </ion-content>

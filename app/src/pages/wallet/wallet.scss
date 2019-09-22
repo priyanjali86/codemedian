@@ -1,0 +1,33 @@
+page-wallet {
+    ion-navbar {background:$toolbarbg;}
+    .toolbar-title {
+        
+    }
+    .profileImage {background:url(../../assets/imgs/profile-bg.svg) no-repeat center -2px;background-size: 100%;
+        margin:-16px -16px 0;padding:0 16px 0;display:flex; justify-content: center;    
+                
+        .imgWrap {position:relative; background:url(../../assets/imgs/profile-image.jpg) no-repeat center top; background-size: cover;width:200px;height:200px;border-radius:50%;overflow: hidden;
+            button {position: absolute;bottom:9px;right:10px;background:transparent;
+            ion-icon {font-size:45px;color:#ce5232;}
+            }
+        }
+        ion-avatar {width:100%;overflow:hidden;height: 200px;
+            img {display: inline-block;height:200px;transform: scale(1.1)}
+        }
+        
+    }
+    .money {text-align: center;padding: 10px 0 15px;
+    h5 {font-size: 2rem;}
+    h1 {font-size: 5rem;font-weight: bold;margin: 0px;}
+    .button-round {background: #f3901f;border-radius: 15px;padding: 30px 41px; font-size: 2rem;}
+    }
+
+    .card {width: 100%!important;margin: 0 0 15px!important;background:#f1efef!important;
+        .card-header {padding:0 0 5px; font-weight: bold;color:#545454}
+        .card-content {color:#545454;padding:0 0 5px;font-size: 1.2rem;}
+        .options {display: flex;align-items: center;justify-content: center;
+        ion-icon {font-size: 3.2rem;}
+        }
+    }
+
+}
